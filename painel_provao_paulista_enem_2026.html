@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Provão Paulista 2026 e ENEM 2026 | URE Guaratinguetá</title>
+<style>
+:root{
+  --navy:#0b2a6f; --blue:#154c9f; --green:#2f8f5b; --red:#d71920;
+  --ink:#17324a; --muted:#667786; --line:#dce5eb; --soft:#f6f9fb;
+  --soft-green:#eef8f2; --sand:#d3a64b; --sand-light:#f2d58b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+body{overflow-x:hidden}
+.wrapper{width:100%;max-width:1180px;margin:0 auto;padding:14px}
+.panel,.enem{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(11,42,111,.08)}
+.topline{height:7px;background:linear-gradient(90deg,var(--navy),var(--blue) 58%,var(--green))}
+.hero{padding:28px 26px 24px;text-align:center;background:linear-gradient(180deg,#f8fbff,#fff)}
+.badge{display:inline-block;padding:7px 15px;border-radius:999px;background:#edf7f1;color:#167343;font-size:12px;font-weight:700;letter-spacing:.8px;margin-bottom:13px}
+.hero h1{margin:0;font-size:clamp(25px,4vw,34px);color:var(--navy)}
+.hero .lead{margin:10px 0 4px;font-size:16px;font-weight:700;color:#275c47}
+.hero .date{margin:0 0 22px;color:var(--muted);font-size:14px}
+.count-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:760px;margin:0 auto}
+.count-card{border:1px solid var(--line);background:var(--soft);border-radius:12px;padding:15px 8px}
+.count-card strong{display:block;font-size:36px;line-height:1;color:var(--navy)}
+.count-card span{display:block;margin-top:7px;font-size:10px;font-weight:700;letter-spacing:.9px}
+.section-title{padding:13px 20px;background:#f3f7fa;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center;color:var(--navy);font-size:12px;font-weight:700;letter-spacing:1.2px}
+.schedule{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.schedule-card{padding:20px 22px;min-height:112px;border-bottom:1px solid var(--line)}
+.schedule-card:nth-child(odd){border-right:1px solid var(--line)}
+.schedule-card.active{background:var(--soft-green);box-shadow:inset 5px 0 0 var(--green)}
+.status{display:none;width:max-content;margin-bottom:8px;padding:4px 8px;border-radius:999px;background:var(--green);color:#fff;font-size:9px;font-weight:700;letter-spacing:.6px}
+.schedule-card.active .status{display:inline-block}
+.schedule-card h3{margin:0 0 6px;font-size:16px;color:var(--navy)}
+.schedule-card p{margin:3px 0;font-size:13px;line-height:1.5}
+.schedule-card small{color:var(--muted)}
+.enem{margin-top:18px}
+.enem-inner{display:grid;grid-template-columns:320px 1fr;align-items:center;gap:22px;padding:26px}
+.hourglass-wrap{text-align:center}
+.hourglass{position:relative;width:150px;height:220px;margin:0 auto 14px;filter:drop-shadow(0 6px 10px rgba(11,42,111,.12))}
+.hourglass .frame-top,.hourglass .frame-bottom{position:absolute;left:8px;width:134px;height:13px;background:var(--navy);border-radius:8px}
+.hourglass .frame-top{top:0}.hourglass .frame-bottom{bottom:0}
+.hourglass .side-l,.hourglass .side-r{position:absolute;top:10px;width:8px;height:200px;background:var(--navy);border-radius:8px}
+.hourglass .side-l{left:17px;transform:rotate(-8deg)}.hourglass .side-r{right:17px;transform:rotate(8deg)}
+.glass{position:absolute;left:28px;top:18px;width:94px;height:184px;overflow:hidden;clip-path:polygon(0 0,100% 0,60% 48%,100% 100%,0 100%,40% 48%);background:rgba(235,245,250,.65);border:2px solid rgba(21,76,159,.24)}
+.sand-top,.sand-bottom{position:absolute;left:0;width:100%;background:linear-gradient(180deg,var(--sand-light),var(--sand))}
+.sand-top{top:0;height:50%;transform-origin:bottom;transition:height .9s linear}
+.sand-bottom{bottom:0;height:10%;transition:height .9s linear}
+.stream{position:absolute;left:50%;top:47%;transform:translateX(-50%);width:4px;height:54%;background:linear-gradient(var(--sand-light),var(--sand));border-radius:3px;animation:fall 1s linear infinite}
+@keyframes fall{0%{opacity:.35}50%{opacity:1}100%{opacity:.35}}
+@media(prefers-reduced-motion:reduce){.stream{animation:none}}
+.enem-copy h2{margin:0 0 8px;color:var(--navy);font-size:28px}
+.enem-copy .subtitle{font-weight:700;color:#304f71;margin-bottom:16px}
+.enem-count{display:grid;grid-template-columns:repeat(4,minmax(86px,1fr));gap:10px}
+.enem-count .box{padding:14px 8px;text-align:center;border:1px solid var(--line);border-radius:10px;background:#f8fafc}
+.enem-count strong{display:block;font-size:30px;color:var(--navy)}
+.enem-count span{font-size:10px;font-weight:700;letter-spacing:.8px}
+.enem-note{margin-top:15px;padding:11px 13px;background:#f8fafc;border-left:4px solid var(--blue);font-size:13px;color:#415669}
+.footer{border-top:4px solid var(--red);padding:13px 20px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:760px){
+  .wrapper{padding:8px}
+  .hero{padding:24px 14px 20px}
+  .count-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .schedule{grid-template-columns:1fr}
+  .schedule-card:nth-child(odd){border-right:0}
+  .enem-inner{grid-template-columns:1fr;padding:22px 16px}
+  .enem-copy{text-align:center}
+  .enem-count{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <section class="panel" aria-label="Contagem regressiva Provão Paulista 2026">
+    <div class="topline"></div>
+    <div class="hero">
+      <div class="badge">PROVÃO PAULISTA 2026</div>
+      <h1>Contagem regressiva para o Provão Paulista</h1>
+      <div class="lead" id="provaopaulistaTexto">Próxima aplicação: 3ª série do Ensino Médio</div>
+      <p class="date" id="provaopaulistaData">04 e 05 de novembro de 2026</p>
+      <div class="count-grid">
+        <div class="count-card"><strong id="sd">00</strong><span>DIAS</span></div>
+        <div class="count-card"><strong id="sh">00</strong><span>HORAS</span></div>
+        <div class="count-card"><strong id="sm">00</strong><span>MINUTOS</span></div>
+        <div class="count-card"><strong id="ss">00</strong><span>SEGUNDOS</span></div>
+      </div>
+    </div>
+    <div class="section-title">CRONOGRAMA DE APLICAÇÃO</div>
+    <div class="schedule">
+      <article class="schedule-card" id="sc0">
+        <span class="status">PRÓXIMA APLICAÇÃO</span>
+        <h3>3ª série do Ensino Médio</h3>
+        <p>04 e 05 de novembro de 2026</p>
+        <small>Provão Paulista</small>
+      </article>
+      <article class="schedule-card" id="sc1">
+        <span class="status">PRÓXIMA APLICAÇÃO</span>
+        <h3>2ª série do Ensino Médio</h3>
+        <p>10 e 11 de novembro de 2026</p>
+        <small>Provão Paulista</small>
+      </article>
+      <article class="schedule-card" id="sc2">
+        <span class="status">PRÓXIMA APLICAÇÃO</span>
+        <h3>1ª série do Ensino Médio</h3>
+        <p>12 e 13 de novembro de 2026</p>
+        <small>Provão Paulista</small>
+      </article>
+      <article class="schedule-card">
+        <h3>A URE Guaratinguetá acredita em você!</h3>
+        <p>Acredite no seu potencial, confie no que aprendeu e dê o seu melhor no Provão Paulista. Seu futuro começa com as oportunidades que você conquista hoje!</p>
+        <small>Boa prova!</small>
+      </article>
+    </div>
+    <div class="footer">Unidade Regional de Ensino Guaratinguetá</div>
+  </section>
+
+  <section class="enem" aria-label="Contagem regressiva ENEM 2026">
+    <div class="topline"></div>
+    <div class="enem-inner">
+      <div class="hourglass-wrap">
+        <div class="hourglass" aria-hidden="true">
+          <div class="frame-top"></div><div class="frame-bottom"></div>
+          <div class="side-l"></div><div class="side-r"></div>
+          <div class="glass">
+            <div class="sand-top" id="sandTop"></div>
+            <div class="stream" id="sandStream"></div>
+            <div class="sand-bottom" id="sandBottom"></div>
+          </div>
+        </div>
+        <div class="badge">ENEM 2026</div>
+      </div>
+      <div class="enem-copy">
+        <h2 id="enemTitulo">Contagem regressiva ENEM 2026</h2>
+        <div class="subtitle" id="enemSub">1º dia de prova · 8 de novembro de 2026</div>
+        <div class="enem-count">
+          <div class="box"><strong id="ed">00</strong><span>DIAS</span></div>
+          <div class="box"><strong id="eh">00</strong><span>HORAS</span></div>
+          <div class="box"><strong id="em">00</strong><span>MINUTOS</span></div>
+          <div class="box"><strong id="es">00</strong><span>SEGUNDOS</span></div>
+        </div>
+        <div class="enem-note" id="enemNota">Orientação do calendário: chegar às 12h; início das provas às 13h.</div>
+        <div style="margin-top:16px;padding:12px 14px;border-radius:10px;background:#eef8f2;border:1px solid #cfe7d8;color:#2f6f4d;font-size:14px;font-weight:700;line-height:1.45;text-align:center">
+          URE Guaratinguetá: compromisso, organização e trabalho em rede para fortalecer a aprendizagem e apoiar nossos estudantes no Provão Paulista e no ENEM 2026. Cada esforço conta, cada conquista importa e cada sonho merece uma oportunidade!
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<script>
+(function(){
+  const pad=n=>String(Math.max(0,n)).padStart(2,'0');
+  const provas=[
+    {inicio:new Date('2026-11-04T00:00:00-03:00'),fim:new Date('2026-11-05T23:59:59-03:00'),texto:'3ª série do Ensino Médio',data:'04 e 05 de novembro de 2026'},
+    {inicio:new Date('2026-11-10T00:00:00-03:00'),fim:new Date('2026-11-11T23:59:59-03:00'),texto:'2ª série do Ensino Médio',data:'10 e 11 de novembro de 2026'},
+    {inicio:new Date('2026-11-12T00:00:00-03:00'),fim:new Date('2026-11-13T23:59:59-03:00'),texto:'1ª série do Ensino Médio',data:'12 e 13 de novembro de 2026'}
+  ];
+  function updateProvaoPaulista(){
+    const now=new Date();
+    let active=provas.findIndex(p=>now>=p.inicio&&now<=p.fim);
+    let next=active;
+    if(active===-1) next=provas.findIndex(p=>p.inicio>now);
+    provas.forEach((p,i)=>{
+      const card=document.getElementById('sc'+i);
+      card.classList.toggle('active',i===next);
+      const status=card.querySelector('.status');
+      status.textContent=(i===active)?'EM ANDAMENTO':'PRÓXIMA APLICAÇÃO';
+    });
+    if(next===-1){
+      document.getElementById('provaopaulistaTexto').textContent='Provão Paulista 2026';
+      document.getElementById('provaopaulistaData').textContent='Período de aplicação concluído';
+      ['sd','sh','sm','ss'].forEach(id=>document.getElementById(id).textContent='00');
+      return;
+    }
+    const p=provas[next];
+    document.getElementById('provaopaulistaTexto').textContent=(active>=0?'Aplicação em andamento: ':'Próxima aplicação: ')+p.texto;
+    document.getElementById('provaopaulistaData').textContent=p.data;
+    if(active>=0){
+      ['sd','sh','sm','ss'].forEach(id=>document.getElementById(id).textContent='00');
+      return;
+    }
+    const t=p.inicio-now;
+    document.getElementById('sd').textContent=pad(Math.floor(t/86400000));
+    document.getElementById('sh').textContent=pad(Math.floor((t%86400000)/3600000));
+    document.getElementById('sm').textContent=pad(Math.floor((t%3600000)/60000));
+    document.getElementById('ss').textContent=pad(Math.floor((t%60000)/1000));
+  }
+  const enem=[
+    {alvo:new Date('2026-11-08T13:00:00-03:00'),rotulo:'1º dia de prova · 8 de novembro de 2026'},
+    {alvo:new Date('2026-11-15T13:00:00-03:00'),rotulo:'2º dia de prova · 15 de novembro de 2026'}
+  ];
+  const inicioVisual=new Date('2026-10-16T00:00:00-03:00');
+  function updateEnem(){
+    const now=new Date();
+    const idx=enem.findIndex(e=>e.alvo>now);
+    if(idx<0){
+      document.getElementById('enemTitulo').textContent='ENEM 2026 concluído';
+      document.getElementById('enemSub').textContent='Aplicações de 8 e 15 de novembro';
+      ['ed','eh','em','es'].forEach(id=>document.getElementById(id).textContent='00');
+      document.getElementById('sandTop').style.height='0%';
+      document.getElementById('sandBottom').style.height='100%';
+      document.getElementById('sandStream').style.display='none';
+      return;
+    }
+    const e=enem[idx],t=e.alvo-now;
+    document.getElementById('enemTitulo').textContent=idx===0?'Contagem regressiva ENEM 2026':'Contagem regressiva ENEM 2026 · 2º dia';
+    document.getElementById('enemSub').textContent=e.rotulo;
+    document.getElementById('ed').textContent=pad(Math.floor(t/86400000));
+    document.getElementById('eh').textContent=pad(Math.floor((t%86400000)/3600000));
+    document.getElementById('em').textContent=pad(Math.floor((t%3600000)/60000));
+    document.getElementById('es').textContent=pad(Math.floor((t%60000)/1000));
+    const base=idx===0?inicioVisual:enem[0].alvo;
+    const total=Math.max(1,e.alvo-base),remain=Math.max(0,e.alvo-now);
+    const topPct=Math.max(0,Math.min(100,(remain/total)*100));
+    document.getElementById('sandTop').style.height=topPct+'%';
+    document.getElementById('sandBottom').style.height=(100-topPct)+'%';
+    document.getElementById('sandStream').style.display='block';
+  }
+  updateProvaoPaulista(); updateEnem();
+  setInterval(updateProvaoPaulista,1000); setInterval(updateEnem,1000);
+})();
+</script>
+</body>
+</html>
