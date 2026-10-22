@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#064b26">
+  <meta name="description" content="Ofertas da Banca do Lucas — frutas frescas e polpas.">
+  <title>Banca do Lucas | Ofertas</title>
+  <style>
+    :root {
+      --green: #064b26;
+      --deep-green: #022e18;
+      --yellow: #ffe522;
+      --cream: #fffbea;
+      --text: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(50,135,52,.45), transparent 42%),
+        linear-gradient(145deg, #073c20, #011e11 75%);
+      overflow-x: hidden;
+    }
+    .page { width: min(1180px, 100%); margin: 0 auto; padding: 26px 18px 34px; }
+    header { text-align: center; margin-bottom: 10px; }
+    .eyebrow {
+      display: inline-block; padding: 7px 15px; border-radius: 999px;
+      background: var(--yellow); color: #123817; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 1.5px; font-size: .76rem;
+    }
+    h1 { margin: 13px 0 5px; font-size: clamp(2rem, 5vw, 3.8rem); line-height: 1; }
+    h1 span { color: var(--yellow); }
+    .subtitle { color: #e6f3e7; margin: 12px 0 0; font-size: clamp(.95rem, 2vw, 1.12rem); }
+    .stage {
+      position: relative; width: 100%; height: clamp(400px, 57vw, 620px);
+      perspective: 1400px; overflow: hidden; margin: 6px auto 0;
+      touch-action: pan-y;
+    }
+    .carousel {
+      position: absolute; width: 230px; height: 350px;
+      top: 50%; left: 50%; transform-style: preserve-3d;
+      transform: translate(-50%, -50%);
+      transition: transform .8s cubic-bezier(.2,.7,.2,1);
+    }
+    .slide {
+      position: absolute; inset: 0; overflow: hidden;
+      border: 3px solid rgba(255,229,34,.92); border-radius: 17px;
+      background: #0d5b30; box-shadow: 0 15px 40px #0008;
+      backface-visibility: hidden; cursor: pointer;
+      transition: filter .5s, opacity .5s;
+    }
+    .slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .slide .placeholder {
+      height: 100%; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; text-align: center; padding: 22px;
+      background: linear-gradient(145deg, #126b35, #03391d);
+      color: white;
+    }
+    .placeholder .number { color: var(--yellow); font-size: 3rem; font-weight: 900; }
+    .placeholder strong { font-size: 1.25rem; line-height: 1.2; margin: 12px 0 8px; }
+    .placeholder small { color: #d8efdc; line-height: 1.5; }
+    .slide .caption {
+      position: absolute; inset: auto 0 0; padding: 38px 12px 13px;
+      background: linear-gradient(transparent, rgba(0,0,0,.85));
+      font-weight: 800; font-size: .9rem; text-align: center;
+    }
+    .controls { display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: -3px; }
+    button {
+      border: 0; cursor: pointer; font-weight: 900; border-radius: 999px;
+      min-width: 48px; min-height: 48px; padding: 10px 17px;
+      color: #123817; background: var(--yellow); font-size: 1rem;
+      box-shadow: 0 4px 0 #b7a300; transition: transform .15s;
+    }
+    button:hover { transform: translateY(-2px); }
+    button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+    .dots { display: flex; gap: 8px; justify-content: center; margin: 20px 0 0; }
+    .dot { width: 10px; height: 10px; min-width: 10px; min-height: 10px; padding: 0; background: #7ca68a; box-shadow: none; }
+    .dot.active { background: var(--yellow); transform: scale(1.25); }
+    .hint { text-align: center; color: #d7e9da; font-size: .85rem; margin: 15px 0 26px; }
+    .contact {
+      display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px;
+      padding: 18px; border: 1px solid #ffffff28; border-radius: 18px;
+      background: #ffffff0b; text-align: center;
+    }
+    .contact strong { color: var(--yellow); }
+    .whatsapp { color: #103b1d; text-decoration: none; background: #25d366; padding: 12px 18px; border-radius: 999px; font-weight: 900; }
+    footer { text-align: center; font-size: .76rem; color: #a9cbb2; margin-top: 20px; }
+    @media (max-width: 600px) {
+      .page { padding: 22px 10px 28px; }
+      .stage { height: 430px; }
+      .carousel { width: 190px; height: 290px; }
+      .slide { border-width: 2px; }
+      .controls { gap: 9px; }
+      .controls button { min-width: 43px; min-height: 43px; padding: 8px 13px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="eyebrow">Frutas frescas • Polpas • Ofertas</div>
+      <h1>Banca do <span>Lucas</span></h1>
+      <p class="subtitle">Gire o disco e confira nossas ofertas!</p>
+    </header>
+
+    <section class="stage" aria-label="Carrossel de ofertas">
+      <div class="carousel" id="carousel"></div>
+    </section>
+
+    <div class="controls" aria-label="Controles do carrossel">
+      <button id="prev" aria-label="Oferta anterior">❮</button>
+      <button id="toggle" aria-label="Pausar rotação">Ⅱ Pausar</button>
+      <button id="next" aria-label="Próxima oferta">❯</button>
+    </div>
+    <div class="dots" id="dots" aria-label="Selecionar oferta"></div>
+    <p class="hint">As ofertas passam automaticamente. Use as setas ou deslize para os lados.</p>
+
+    <section class="contact">
+      <div>Quer fazer seu pedido? <strong>Fale com a Banca do Lucas.</strong></div>
+      <a class="whatsapp" href="https://wa.me/5512933004255" target="_blank" rel="noopener noreferrer">WhatsApp: (12) 93300-4255</a>
+    </section>
+    <footer>Frutas selecionadas • Qualidade e sabor todo dia</footer>
+  </main>
+
+  <script>
+    // Para adicionar as próximas imagens, coloque os arquivos na pasta "images"
+    // e substitua os itens null abaixo por "images/oferta-3.jpeg", etc.
+    const offers = [
+      { src: "images/oferta-1.jpeg", alt: "Ofertas da semana — frutas frescas da Banca do Lucas", label: "Ofertas da semana" },
+      { src: "images/oferta-2.jpeg", alt: "Polpas de frutas — sabores e preços", label: "Polpas de frutas" },
+      { src: "images/oferta-3.jpeg", alt: "Oferta de morango congelado, pacote de 1 kg por R$ 20,00", label: "Morango congelado" },
+      { src: "images/oferta-4.jpeg", alt: "Cesta Família de frutas — R$ 90,00 no dinheiro ou Pix e R$ 100,00 no cartão", label: "Cesta Família" },
+      { src: "images/oferta-5.jpeg", alt: "Cesta de frutas por R$ 50,00 no Pix ou dinheiro e R$ 60,00 no cartão", label: "Cesta de frutas" },
+      { src: "images/oferta-6.jpeg", alt: "Ovo caipira, caixa com 10 ovos por R$ 11,99", label: "Ovo caipira" },
+      { src: "images/oferta-7.jpeg", alt: "Frutas em destaque: laranja pera, uva verde e roxa, mirtilo, manga, mamão, abacate e pitaya", label: "Frutas em destaque" }
+    ];
+
+    const carousel = document.getElementById("carousel");
+    const dotsContainer = document.getElementById("dots");
+    const total = 7;
+    const angle = 360 / total;
+    let current = 0;
+    let timer = null;
+    let playing = true;
+    const cards = [];
+    const dots = [];
+
+    function render() {
+      offers.forEach((offer, i) => {
+        const card = document.createElement("article");
+        card.className = "slide";
+        card.style.transform = `rotateY(${i * angle}deg) translateZ(var(--radius))`;
+        card.setAttribute("aria-label", `Oferta ${i + 1}: ${offer.label}`);
+        if (offer.src) {
+          const img = document.createElement("img");
+          img.src = offer.src;
+          img.alt = offer.alt;
+          img.loading = i < 2 ? "eager" : "lazy";
+          img.onerror = () => {
+            card.innerHTML = `<div class="placeholder"><span class="number">${i + 1}</span><strong>Imagem não encontrada</strong><small>Confira o nome do arquivo na pasta images.</small></div>`;
+          };
+          card.appendChild(img);
+          const caption = document.createElement("div");
+          caption.className = "caption";
+          caption.textContent = offer.label;
+          card.appendChild(caption);
+        } else {
+          card.innerHTML = `<div class="placeholder"><span class="number">${String(i + 1).padStart(2, "0")}</span><strong>Nova oferta em breve</strong><small>Adicione sua próxima imagem para completar o disco de 7 ofertas.</small></div>`;
+        }
+        card.addEventListener("click", () => goTo(i));
+        carousel.appendChild(card);
+        cards.push(card);
+
+        const dot = document.createElement("button");
+        dot.className = "dot";
+        dot.setAttribute("aria-label", `Mostrar oferta ${i + 1}`);
+        dot.addEventListener("click", () => goTo(i));
+        dotsContainer.appendChild(dot);
+        dots.push(dot);
+      });
+      updateRadius();
+      update();
+    }
+
+    function updateRadius() {
+      const cardWidth = window.innerWidth <= 600 ? 190 : 230;
+      const radius = Math.round((cardWidth / 2) / Math.tan(Math.PI / total) + 28);
+      carousel.style.setProperty("--radius", `${radius}px`);
+    }
+    function update() {
+      carousel.style.transform = `translate(-50%, -50%) rotateY(${-current * angle}deg)`;
+      cards.forEach((card, i) => {
+        const distance = Math.min((i - current + total) % total, (current - i + total) % total);
+        card.style.opacity = distance > 2 ? "0.45" : "1";
+        card.style.filter = distance > 2 ? "brightness(.65)" : "none";
+      });
+      dots.forEach((dot, i) => dot.classList.toggle("active", i === current));
+    }
+    function goTo(index) { current = (index + total) % total; update(); restartTimer(); }
+    function next() { current = (current + 1) % total; update(); }
+    function previous() { current = (current - 1 + total) % total; update(); }
+    function startTimer() { clearInterval(timer); if (playing) timer = setInterval(next, 4500); }
+    function restartTimer() { if (playing) startTimer(); }
+    document.getElementById("next").addEventListener("click", () => { next(); restartTimer(); });
+    document.getElementById("prev").addEventListener("click", () => { previous(); restartTimer(); });
+    document.getElementById("toggle").addEventListener("click", (event) => {
+      playing = !playing;
+      event.currentTarget.textContent = playing ? "Ⅱ Pausar" : "▶ Reproduzir";
+      event.currentTarget.setAttribute("aria-label", playing ? "Pausar rotação" : "Retomar rotação");
+      if (playing) startTimer(); else clearInterval(timer);
+    });
+
+    let startX = 0;
+    const stage = document.querySelector(".stage");
+    stage.addEventListener("touchstart", e => { startX = e.changedTouches[0].screenX; }, { passive: true });
+    stage.addEventListener("touchend", e => {
+      const delta = e.changedTouches[0].screenX - startX;
+      if (Math.abs(delta) > 40) { delta < 0 ? next() : previous(); restartTimer(); }
+    }, { passive: true });
+    window.addEventListener("resize", updateRadius);
+    render();
+    startTimer();
+  </script>
+</body>
+</html>
