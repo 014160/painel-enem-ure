@@ -1,0 +1,24 @@
+BANCA DO LUCAS — CARROSSEL DE OFERTAS
+
+ARQUIVOS
+- index.html: página pronta
+- images/oferta-1.jpeg: imagem das ofertas da semana
+- images/oferta-2.jpeg: imagem das polpas
+- images/oferta-3.jpeg: morango congelado (1 kg)
+- images/oferta-4.jpeg: Cesta Família
+- images/oferta-5.jpeg: Cesta de frutas
+- images/oferta-6.jpeg: Ovo caipira
+- images/oferta-7.jpeg: Frutas em destaque
+
+COMO ADICIONAR AS PRÓXIMAS IMAGENS
+As sete imagens já estão incluídas no projeto. Para trocar uma oferta futuramente, substitua o arquivo correspondente na pasta images mantendo o mesmo nome e publique novamente no Vercel.
+
+PUBLICAR NO VERCEL
+1. Extraia o ZIP.
+2. Entre em https://vercel.com e crie um projeto novo.
+3. Importe a pasta/repositório do projeto ou arraste os arquivos pelo fluxo de deploy disponível.
+4. Não precisa de build command nem framework: é um site estático.
+5. Se usar GitHub, envie index.html e a pasta images para o repositório e importe esse repositório no Vercel.
+
+O carrossel já tem as 7 posições preenchidas com as imagens enviadas.
+O telefone/WhatsApp está configurado como +55 12 93300-4255. Para alterar, edite o link wa.me e o texto no index.html.
